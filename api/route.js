@@ -1,4 +1,4 @@
-export default async function handler(req, res) {
+module.exports = async function (req, res) {
     const { lat, lon, dlat, dlon } = req.query;
     const apiKey = "gdk_live_R8lMzHJLuGe_dGk2mWKZ7NuI";
     
@@ -15,11 +15,13 @@ export default async function handler(req, res) {
             for (let step of steps) {
                 coords.push(`${step.start_location.lat},${step.start_location.lng}`);
             }
+            // Thêm điểm đích vào cuối cùng
             coords.push(`${dlat},${dlon}`);
         }
         
+        // Trả về chuỗi tọa độ cách nhau bởi dấu |
         res.status(200).send(coords.slice(0, 30).join('|'));
     } catch (error) {
         res.status(500).send("ERROR");
     }
-}
+};
