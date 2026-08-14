@@ -29,7 +29,7 @@
                 document.getElementById('status').innerText = "Trạng thái: Đang quét BLE...";
                 
                 const device = await navigator.bluetooth.requestDevice({
-                    filters: [{ name: 'ESP32_GPS' }],
+                    acceptAllDevices: true,
                     optionalServices: [SERVICE_UUID]
                 });
 
